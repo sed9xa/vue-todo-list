@@ -1,19 +1,46 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    show: false,
     posts: [
-      { id: 1, title: "Try to conquer the world", status: 'Done', date: '22.04.2022' },
-      { id: 2, title: "Feed the cat", status: 'in work', date: '22.04.2022' },
-      { id: 3, title: "Take a shower", status: 'Done', date: '22.04.2022' },
+      {
+        id: 1,
+        description: "Размещение новостей на сайте",
+        status: "В работе",
+        date: "22.04.2022",
+      },
+      {
+        id: 2,
+        description: "Внедрить Wi-fi для читателей",
+        status: "В работе",
+        date: "22.04.2022",
+      },
+      {
+        id: 3,
+        description: "Отредактировать раздел “Доступная среда”",
+        status: "В работе",
+        date: "22.04.2022",
+      },
     ],
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
+    dialogVisibility(state, payload) {
+      state.show = payload;
+    },
+    changeStatus(state, payload) {
+      if (
+        state.posts.find((post) => post.id === payload).status === "Выполнено"
+      ) {
+        state.posts.find((post) => post.id === payload).status = "В работе";
+      } else if (
+        state.posts.find((post) => post.id === payload).status === "В работе"
+      ) {
+        state.posts.find((post) => post.id === payload).status = "Выполнено";
+      }
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+  actions: {},
+  modules: {},
+});

@@ -16,6 +16,9 @@ export default {
 </script>
 
 <style>
+.searchField{
+    padding-left: 45px;
+}
 .searchInput {
   padding: 10px;
   border: none;
@@ -24,5 +27,7 @@ export default {
 .fa-magnifying-glass {
   color: #59bba6;
   padding-right: 6px;
+  height: 18px;
+  width: 18px;
 }
 </style>
