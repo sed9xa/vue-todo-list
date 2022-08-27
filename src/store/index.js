@@ -27,7 +27,10 @@ export default createStore({
   getters: {
     getPosts(state){
       return state.posts
-    }
+    },
+    getCurrentPost: (state) => (id) => {
+      return state.posts.find(post => post.id === id)
+    },
   },
   mutations: {
     setPosts(state, posts){

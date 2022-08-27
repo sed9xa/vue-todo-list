@@ -44,13 +44,13 @@ export default {
   },
   methods: {
     addPost() {
-      /* let today = new Date();
-      let now = today.toLocaleString(); */
+      let today = new Date();
+      let now = today.toLocaleDateString();
       const newPost = {
         id: Date.now(),
         description: this.description,
         status: "В работе",
-        date: 'now',
+        date: now,
       };
       this.$store.commit('addPost', newPost);
       this.$store.commit('dialogVisibility', false)
@@ -98,7 +98,8 @@ export default {
   }
 }
 .container {
-  margin: 0 150px;
+
+  margin: 104px 150px 0;
 }
 .dialog__header {
   display: flex;

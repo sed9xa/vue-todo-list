@@ -5,7 +5,7 @@
       class="post__check"
       name="check"
       :id="post.id"
-      v-model="checked"
+      v-model="checkedComp"
       @change="changeStatus(post.id)"
     />
     <label :for="post.id" class="check-label"></label>
@@ -32,6 +32,16 @@ export default {
   data(){
     return{
         checked: false,
+    }
+  },
+  computed:{
+    checkedComp(){
+        if (this.$store.getters.getCurrentPost(this.post.id).status === 'В работе'){
+            return false
+        }
+        else if (this.$store.getters.getCurrentPost(this.post.id).status === 'Выполнено'){
+            return true
+        }
     }
   },
   methods:{
