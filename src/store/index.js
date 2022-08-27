@@ -24,10 +24,20 @@ export default createStore({
       },
     ],
   },
-  getters: {},
+  getters: {
+    getPosts(state){
+      return state.posts
+    }
+  },
   mutations: {
-    dialogVisibility(state, payload) {
-      state.show = payload;
+    setPosts(state, posts){
+      state.posts = posts;
+    },
+    dialogVisibility(state, bool) {
+      state.show = bool;
+    },
+    addPost(state, post){
+      state.posts.push(post);
     },
     changeStatus(state, payload) {
       if (

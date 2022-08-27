@@ -5,7 +5,10 @@
     <dialog-window class="dialog">
       <div class="dialog__header">
         <h2 class="dialog__header-title">Создать новую задачу</h2>
-        <button class="dialog__header-close" @click="$store.commit('dialogVisibility', false)">
+        <button
+          class="dialog__header-close"
+          @click="$store.commit('dialogVisibility', false)"
+        >
           <i class="close-icon"></i>
         </button>
       </div>
@@ -15,9 +18,10 @@
           type="text"
           class="dialog__input-field"
           placeholder="Введите описание"
+          v-model="description"
         />
       </div>
-      <button class="dialog__create">Создать</button>
+      <button class="dialog__create" @click="addPost">Создать</button>
     </dialog-window>
   </div>
 </template>
@@ -33,6 +37,38 @@ export default {
     PostList,
     dialogWindow,
   },
+  data() {
+    return {
+      description: "",
+    };
+  },
+  methods: {
+    addPost() {
+      /* let today = new Date();
+      let now = today.toLocaleString(); */
+      const newPost = {
+        id: Date.now(),
+        description: this.description,
+        status: "В работе",
+        date: 'now',
+      };
+      this.$store.commit('addPost', newPost);
+      this.$store.commit('dialogVisibility', false)
+    },
+  },
+  watch: {
+    "$store.state.posts": {
+      handler(val, oldval) {
+        localStorage.setItem("posts", JSON.stringify(this.$store.state.posts));
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    if (localStorage.posts) {
+      this.$store.commit("setPosts", JSON.parse(localStorage.posts));
+    }
+  },
 };
 </script>
 
@@ -40,7 +76,8 @@ export default {
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;font-size: 14px;
+  padding: 0;
+  font-size: 14px;
 }
 #app {
   font-family: sans-serif;
@@ -56,7 +93,7 @@ export default {
     font-family: "Montserrat", sans-serif;
     margin: 0;
   }
-  button{
+  button {
     cursor: pointer;
   }
 }
@@ -102,8 +139,8 @@ export default {
 .dialog__create {
   font-size: 18px;
   padding: 12px 40px;
-  background-color: #F0F5FF;
-  color: #314B99;
+  background-color: #f0f5ff;
+  color: #314b99;
   border-radius: 8px;
   border: none;
 }
