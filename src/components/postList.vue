@@ -4,22 +4,28 @@
     <div class="list__header-status">Статус</div>
     <div class="list__header-data">Дата</div>
   </div>
-  <div class="list__items">
-    <post-item v-for="item in searchQueryPosts" :key="item.id" :post="item"></post-item>
-  </div>
+  <transition-group name="listAnimation">
+    <div class="list__items">
+      <post-item
+        v-for="item in searchQueryPosts"
+        :key="item.id"
+        :post="item"
+      ></post-item>
+      </div>
+      </transition-group>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 import postItem from "../components/postItem.vue";
 export default {
   name: "postList",
   components: {
     postItem,
   },
-  computed:{
-    ...mapGetters(['searchQueryPosts'])
-  }
+  computed: {
+    ...mapGetters(["searchQueryPosts"]),
+  },
 };
 </script>
 
@@ -58,5 +64,20 @@ export default {
 }
 .list__items:first-child {
   border-top: 1px solid #eeebe9;
+}
+.listAnimation-enter-from,
+.listAnimation-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
+
+.listAnimation-leave-active {
+  transition: 0.5s;
+}
+.listAnimation-enter-active {
+  transition: 0.5s;
+}
+.listAnimation-move{
+  transition: .8s;
 }
 </style>

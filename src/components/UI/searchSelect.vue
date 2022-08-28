@@ -1,16 +1,36 @@
 <template>
   <div class="searchSelect">
     <p class="label">Сортировать по:</p>
-    <select name="" id="" class="select">
-      <option value="date">Дата</option>
-      <option value="status">Статус</option>
-    </select>
+    <select name="" id="" v-model="modelValue" @change="updateValue" class="selectFilter">
+    <option disabled value="" >Выберите фильтр</option>
+    <option
+      :value="filterOption.value"
+      v-for="filterOption in filterOptions"
+      :key="filterOption.id"
+    >
+      {{filterOption.name}}
+    </option>
+    >
+  </select>
   </div>
 </template>
 
 <script>
 export default {
   name: "searchSelect",
+   props:{
+    modelValue: {
+        type: String,
+    },
+    filterOptions:{
+        type: Array,
+    }
+  },
+  methods: {
+    updateValue(event) {
+      this.$emit("update:modelValue", event.target.value);
+    },
+  },
 };
 </script>
 
@@ -18,7 +38,7 @@ export default {
 .searchSelect {
   display: flex;
 }
-.select{
+.selectFilter{
   padding-left: 10px;
   border: none;
 }

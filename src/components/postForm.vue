@@ -10,9 +10,14 @@
     <search-field
       class="app__search-field"
       :modelValue="searchQuery"
-      @update:modelValue = "setSearchQuery"
+      @update:modelValue="setSearchQuery"
     ></search-field>
-    <search-select class="app__search-select"></search-select>
+    <search-select
+      class="app__search-select"
+      :modelValue="filterOption"
+      @update:modelValue="setFilterOption"
+      :filterOptions="filterOptions"
+    ></search-select>
   </div>
 </template>
 
@@ -33,15 +38,14 @@ export default {
       /* searchQuery: "", */
     };
   },
-  methods:{
-    ...mapMutations([
-      'setSearchQuery',
-    ])
+  methods: {
+    ...mapMutations(["setSearchQuery", "setFilterOption"]),
   },
   computed: {
     ...mapState({
       searchQuery: (state) => state.searchQuery,
-      posts: (state) => state.posts,
+      filterOption: (state) => state.filterOption,
+      filterOptions: (state) => state.filterOptions,
     }),
     ...mapGetters({
       filteredPosts: "filteredPosts",
