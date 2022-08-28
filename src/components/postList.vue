@@ -4,15 +4,16 @@
     <div class="list__header-status">Статус</div>
     <div class="list__header-data">Дата</div>
   </div>
-  <transition-group name="listAnimation">
-    <div class="list__items">
+
+  <div class="list__items">
+    <transition-group name="listAnimation">
       <post-item
         v-for="item in searchQueryPosts"
         :key="item.id"
         :post="item"
       ></post-item>
-      </div>
-      </transition-group>
+    </transition-group>
+  </div>
 </template>
 
 <script>
@@ -77,7 +78,7 @@ export default {
 .listAnimation-enter-active {
   transition: 0.5s;
 }
-.listAnimation-move{
-  transition: .8s;
+.listAnimation-move {
+  transition: 0.8s;
 }
 </style>

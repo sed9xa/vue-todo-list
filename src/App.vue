@@ -96,6 +96,11 @@ export default {
   button {
     cursor: pointer;
   }
+  @media (max-width: 950px) {
+    .container{
+      margin: 0;
+    }
+  }
 }
 .container {
 

@@ -2,7 +2,7 @@
   <div class="searchSelect">
     <p class="label">Сортировать по:</p>
     <select name="" id="" v-model="modelValue" @change="updateValue" class="selectFilter">
-    <option disabled value="" >Выберите фильтр</option>
+    <option disabled value="" >Без фильтра</option>
     <option
       :value="filterOption.value"
       v-for="filterOption in filterOptions"

@@ -33,11 +33,7 @@ export default {
     searchField,
     searchSelect,
   },
-  data() {
-    return {
-      /* searchQuery: "", */
-    };
-  },
+
   methods: {
     ...mapMutations(["setSearchQuery", "setFilterOption"]),
   },
@@ -76,7 +72,5 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 30px;
-}
-.app__search-field {
 }
 </style>
