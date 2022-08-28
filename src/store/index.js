@@ -3,6 +3,12 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     show: false,
+    searchQuery: "",
+      filterOption: "",
+      filterOptions: [
+        { id: 1, value: "title", name: "By title" },
+        { id: 2, value: "body", name: "By description" },
+      ],
     posts: [
       {
         id: 1,
@@ -31,10 +37,26 @@ export default createStore({
     getCurrentPost: (state) => (id) => {
       return state.posts.find(post => post.id === id)
     },
+    filteredPosts(state) {
+      return [...state.posts].sort((post1, post2) => {
+        if (state.filterOption != 0) {
+          return post1[state.filterOption].localeCompare(
+            post2[state.filterOption]
+          );
+        }
+        else return state.posts
+      });
+    },
+    searchQueryPosts(state, getters){
+      return getters.filteredPosts.filter(post => post.description.includes(state.searchQuery))
+    }
   },
   mutations: {
     setPosts(state, posts){
       state.posts = posts;
+    },
+    setSearchQuery(state, searchQuery){
+      state.searchQuery = searchQuery
     },
     dialogVisibility(state, bool) {
       state.show = bool;

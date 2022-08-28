@@ -5,17 +5,21 @@
     <div class="list__header-data">Дата</div>
   </div>
   <div class="list__items">
-    <post-item v-for="item in $store.state.posts" :key="item.id" :post="item"></post-item>
+    <post-item v-for="item in searchQueryPosts" :key="item.id" :post="item"></post-item>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import postItem from "../components/postItem.vue";
 export default {
   name: "postList",
   components: {
     postItem,
   },
+  computed:{
+    ...mapGetters(['searchQueryPosts'])
+  }
 };
 </script>
 
